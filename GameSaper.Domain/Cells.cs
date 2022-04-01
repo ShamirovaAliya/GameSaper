@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GameSaper.Domain
+{
+    public class Cells //Ячейки
+    {
+        public int BombsNumber { get; set; }
+    }
+}
