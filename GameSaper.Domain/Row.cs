@@ -8,6 +8,6 @@ namespace GameSaper.Domain
 {
     public class Row //Ряд
     {
-
+       
     }
 }

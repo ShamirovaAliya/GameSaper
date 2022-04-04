@@ -8,6 +8,6 @@ namespace GameSaper.Domain
 {
     public class Cells //Ячейки
     {
-        public int BombsNumber { get; set; }
+       
     }
 }

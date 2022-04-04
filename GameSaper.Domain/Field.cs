@@ -8,6 +8,8 @@ namespace GameSaper.Domain
 {
     public class Field //Поле
     {
-
+        public int BombsNumber { get; set; }
+        public int FlagNumbers { get; set; }
+        public int Nubmers { get; set; }
     }
 }
