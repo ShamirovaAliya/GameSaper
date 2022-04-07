@@ -12,5 +12,7 @@ namespace GameSaper.Domain
         public bool WithFlag { get; set; }
         public int VerticalPosition { get; set; }
         public int HorizontalPosition { get; set; }
+        public bool IsOpen { get; set; }
+        public bool IsHidden { get; set; }
     }
 }
