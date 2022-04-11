@@ -16,13 +16,13 @@ namespace GameSaper.Domain
                 Cells[i] = new Cell();
             }
 
-            Random rng = new Random();
+            Random rnd = new Random();
             for (int i = 1; i < bombsNumber; i++)
             {
                 int index = 0;
                 do
                 {
-                    index = r.Next(0, Cells.Length - 1);
+                    index = rnd.Next(0, Cells.Length - 1);
                 }
                 while (Cells[index].IsBomb);
 

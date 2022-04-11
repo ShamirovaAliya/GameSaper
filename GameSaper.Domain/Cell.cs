@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameSaper.Domain
 {
-    public class Cell //Ячейки
+    public class Cell //Ячейка
     {
         public bool IsBomb { get; set; }
         public bool WithFlag { get; set; }
