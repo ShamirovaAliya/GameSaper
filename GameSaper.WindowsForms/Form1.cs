@@ -24,16 +24,27 @@ namespace GameSaper.WindowsForms
 
         private void StartGame()
         {
-            for (int x = 10; x < height * distance; x += distance)
+           for (int x = 10; x < height * distance; x += distance)
             {
                 for (int y = 10; y < width * distance; y += distance)
                 {
                     Button button = new Button();
+                    button.Click += CellBtn_Click;
                     button.Location = new Point(x, y);
                     button.Size = new Size(30, 30);
                     GamePanel.Controls.Add(button);
                 }
             }
+        }
+
+        private void CellBtn_Click(object sender, EventArgs e)
+        {
+            var CellBtn_Click = new Dictionary<int, string>()
+            {
+                { 5, "Tom"},
+                { 3, "Sam"},
+                { 11, "Bob"}
+            };
         }
     }
 }

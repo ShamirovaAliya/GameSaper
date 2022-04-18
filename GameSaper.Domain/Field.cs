@@ -13,7 +13,10 @@ namespace GameSaper.Domain
             Cells = new Cell[hight * widht];
             for (int i = 0; i < Cells.Length; i++)
             {
-                Cells[i] = new Cell();
+                Cells[i] = new Cell()
+                {
+                    Id = Guid.NewGuid().ToString()
+                };
             }
 
             Random rnd = new Random();
@@ -32,6 +35,6 @@ namespace GameSaper.Domain
         public int BombsNumber { get; set; }
         public int FlagNumbers { get; set; }
         public int Nubmers { get; set; }
-        Cell[] Cells { get; set; }
+        public Cell[] Cells { get; set; }
     }
 }
