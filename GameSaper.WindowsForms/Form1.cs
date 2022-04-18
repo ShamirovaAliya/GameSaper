@@ -1,3 +1,5 @@
+using GameSaper.Domain;
+
 namespace GameSaper.WindowsForms
 {
     public partial class Form1 : Form
@@ -6,6 +8,7 @@ namespace GameSaper.WindowsForms
         int width = 10;
         int distance = 35;
         int numberMine = 10;
+        Dictionary<Button, Cell> dictionaryCell = new Dictionary<Button, Cell>();
 
         public Form1()
         {
@@ -24,14 +27,23 @@ namespace GameSaper.WindowsForms
 
         private void StartGame()
         {
-           for (int x = 10; x < height * distance; x += distance)
+            Field field = new Field(10, 10, 10);
+
+            for (int x = 10; x < height * distance; x += distance)
             {
+                int index = (x - 10) / distance;
+                var row = field.Rows[index];
                 for (int y = 10; y < width * distance; y += distance)
                 {
+                    int cellIndex = (y - 10) / distance;
+                    var cell = row.Cells[cellIndex];
+
                     Button button = new Button();
                     button.Click += CellBtn_Click;
                     button.Location = new Point(x, y);
                     button.Size = new Size(30, 30);
+
+                    dictionaryCell.Add(button, cell);
                     GamePanel.Controls.Add(button);
                 }
             }
@@ -39,12 +51,8 @@ namespace GameSaper.WindowsForms
 
         private void CellBtn_Click(object sender, EventArgs e)
         {
-            var CellBtn_Click = new Dictionary<int, string>()
-            {
-                { 5, "Tom"},
-                { 3, "Sam"},
-                { 11, "Bob"}
-            };
+            var Button = (Button)sender;
+            var Cell = dictionaryCell[Button];
         }
     }
 }
