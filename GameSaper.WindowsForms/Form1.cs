@@ -9,6 +9,7 @@ namespace GameSaper.WindowsForms
         int distance = 35;
         int numberMine = 10;
         Dictionary<Button, Cell> dictionaryCell = new Dictionary<Button, Cell>();
+        Field field = new Field(10, 10, 10);
 
         public Form1()
         {
@@ -27,8 +28,6 @@ namespace GameSaper.WindowsForms
 
         private void StartGame()
         {
-            Field field = new Field(10, 10, 10);
-
             for (int x = 10; x < height * distance; x += distance)
             {
                 int index = (x - 10) / distance;
@@ -53,6 +52,12 @@ namespace GameSaper.WindowsForms
         {
             var Button = (Button)sender;
             var Cell = dictionaryCell[Button];
+            field.CellOpen(Cell.Id);
+            if (Cell.IsBomb)
+            {
+                MessageBox.Show("Вы проиграли!");
+                Button.Text = "*";
+            }
         }
     }
 }

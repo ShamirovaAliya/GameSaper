@@ -45,7 +45,7 @@
             // GamePanel
             // 
             this.GamePanel.AutoScroll = true;
-            this.GamePanel.Location = new System.Drawing.Point(12, 74);
+            this.GamePanel.Location = new System.Drawing.Point(12, 79);
             this.GamePanel.Name = "GamePanel";
             this.GamePanel.Size = new System.Drawing.Size(390, 360);
             this.GamePanel.TabIndex = 1;
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 441);
+            this.ClientSize = new System.Drawing.Size(394, 441);
             this.Controls.Add(this.GamePanel);
             this.Controls.Add(this.StartBtn);
             this.Name = "Form1";

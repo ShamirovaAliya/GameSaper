@@ -8,9 +8,9 @@ namespace GameSaper.Domain
 {
     public class Row //Ряд
     {
-        public Row(int numberCell)
+        public Row(int cellNumber)
         {
-            Cells = new Cell[numberCell];
+            Cells = new Cell[cellNumber];
             for (int i = 0; i < Cells.Length; i++)
             {
                 Cells[i] = new Cell()

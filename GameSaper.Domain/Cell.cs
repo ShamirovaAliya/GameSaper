@@ -12,6 +12,5 @@ namespace GameSaper.Domain
         public bool IsBomb { get; set; }
         public bool WithFlag { get; set; }
         public bool IsOpen { get; set; }
-        public bool IsHidden { get; set; }
     }
 }
