@@ -38,7 +38,7 @@ namespace GameSaper.WindowsForms
                     var cell = row.Cells[cellIndex];
 
                     Button button = new Button();
-                    button.Click += CellBtn_Click;
+                    button.MouseDown += CellBtn_Click;
                     button.Location = new Point(x, y);
                     button.Size = new Size(30, 30);
 
@@ -48,15 +48,26 @@ namespace GameSaper.WindowsForms
             }
         }
 
-        private void CellBtn_Click(object sender, EventArgs e)
+        private void CellBtn_Click(object sender, MouseEventArgs e)
         {
-            var Button = (Button)sender;
-            var Cell = dictionaryCell[Button];
-            field.CellOpen(Cell.Id);
-            if (Cell.IsBomb)
+            var button = (Button)sender;
+            var cell = dictionaryCell[button];
+            if (e.Button == MouseButtons.Left)
             {
-                MessageBox.Show("Вы проиграли!");
-                Button.Text = "*";
+                field.CellOpen(cell.Id);
+                if (cell.IsBomb)
+                {
+                    MessageBox.Show("Вы проиграли!");
+                    button.Text = "*";
+                }
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                field.FlagPut(cell.Id);
+                if (cell.WithFlag)
+                {
+                    button.Text = "F";
+                }
             }
         }
     }

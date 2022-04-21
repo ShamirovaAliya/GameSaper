@@ -34,12 +34,18 @@ namespace GameSaper.Domain
 
         public void CellOpen(string id)
         {
-            var Cell = Cells.Where(x => x.Id == id).First();
-            Cell.IsOpen = true;
-            if (Cell.IsBomb)
+            var cell = Cells.First(x => x.Id == id);
+            cell.IsOpen = true;
+            if (cell.IsBomb)
             {
                 Explode = true;
             }
+        }
+
+        public void FlagPut(string id)
+        {
+            var cell = Cells.Where((x) => x.Id == id).First();
+            cell.WithFlag = true;
         }
 
         public int BombsNumber { get; set; }
