@@ -8,14 +8,16 @@ namespace GameSaper.Domain
 {
     public class Row //Ряд
     {
-        public Row(int cellNumber)
+        public Row(int cellNumber, int row)
         {
             Cells = new Cell[cellNumber];
             for (int i = 0; i < Cells.Length; i++)
             {
                 Cells[i] = new Cell()
                 {
-                    Id = Guid.NewGuid().ToString()
+                    Id = Guid.NewGuid().ToString(),
+                    Colunm = i,
+                    Row = i,
                 };
             }
         }

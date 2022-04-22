@@ -14,7 +14,7 @@ namespace GameSaper.Domain
             Cells = new List<Cell>();
             for (int i = 0; i < Rows.Length; i++)
             {
-                Rows[i] = new Row(widht);
+                Rows[i] = new Row(widht, i);
                 Cells.AddRange(Rows[i].Cells);
             }
 
@@ -44,8 +44,16 @@ namespace GameSaper.Domain
 
         public void FlagPut(string id)
         {
-            var cell = Cells.Where((x) => x.Id == id).First();
+            var cell = Cells.Where(x => x.Id == id).First();
             cell.WithFlag = true;
+        }
+
+        public int BombCells(string id)
+        {
+            var cell = Cells.Where(x => x.Id == id).First();
+            var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1)
+                .Where(c => c.Colunm >= cell.Colunm && c.Colunm <= cell.Colunm + 1);
+            return cellsAround.Where(c => c.IsBomb).Count();
         }
 
         public int BombsNumber { get; set; }

@@ -30,7 +30,6 @@
         {
             this.StartBtn = new System.Windows.Forms.Button();
             this.GamePanel = new System.Windows.Forms.Panel();
-            this.GamePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // StartBtn
@@ -57,9 +56,6 @@
             this.GamePanel.Size = new System.Drawing.Size(390, 360);
             this.GamePanel.TabIndex = 1;
             // 
-            // CellBtn_Click
-            // 
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -73,7 +69,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1Load);
-            this.GamePanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

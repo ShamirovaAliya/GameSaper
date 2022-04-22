@@ -12,5 +12,7 @@ namespace GameSaper.Domain
         public bool IsBomb { get; set; }
         public bool WithFlag { get; set; }
         public bool IsOpen { get; set; }
+        public int Row { get; set; }
+        public int Colunm { get; set; }
     }
 }

@@ -58,15 +58,16 @@ namespace GameSaper.WindowsForms
                 if (cell.IsBomb)
                 {
                     MessageBox.Show("Вы проиграли!");
-                    button.Text = "*";
+                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
                 }
+                
             }
             else if (e.Button == MouseButtons.Right)
             {
                 field.FlagPut(cell.Id);
                 if (cell.WithFlag)
                 {
-                    button.Text = "F";
+                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img2.png");
                 }
             }
         }
