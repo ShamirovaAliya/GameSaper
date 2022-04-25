@@ -60,7 +60,24 @@ namespace GameSaper.WindowsForms
                     MessageBox.Show("Вы проиграли!");
                     button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
                 }
-                
+                else
+                {
+                    switch (field.BombCells(cell.Id))
+                    {
+                        case 1:
+                            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img3.png");
+                            break;
+                        case 2:
+                            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img4.png");
+                            break;
+                        case 3:
+                            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img5.png");
+                            break;
+                        case 4:
+                            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img6.png");
+                            break;
+                    }
+                }
             }
             else if (e.Button == MouseButtons.Right)
             {

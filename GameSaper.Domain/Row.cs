@@ -17,7 +17,7 @@ namespace GameSaper.Domain
                 {
                     Id = Guid.NewGuid().ToString(),
                     Colunm = i,
-                    Row = i,
+                    Row = row,
                 };
             }
         }

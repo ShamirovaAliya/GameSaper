@@ -18,7 +18,7 @@ namespace GameSaper.Domain
                 Cells.AddRange(Rows[i].Cells);
             }
 
-            Random rnd = new Random();
+            Random rnd = new Random(DateTime.Now.Second);
             for (int i = 1; i <= bombsNumber; i++)
             {
                 int index = 0;
@@ -51,8 +51,10 @@ namespace GameSaper.Domain
         public int BombCells(string id)
         {
             var cell = Cells.Where(x => x.Id == id).First();
-            var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1)
-                .Where(c => c.Colunm >= cell.Colunm && c.Colunm <= cell.Colunm + 1);
+
+            var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1);
+
+            cellsAround = cellsAround.Where(c => c.Colunm >= cell.Colunm - 1 && c.Colunm <= cell.Colunm + 1);
             return cellsAround.Where(c => c.IsBomb).Count();
         }
 
