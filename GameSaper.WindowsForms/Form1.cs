@@ -7,9 +7,8 @@ namespace GameSaper.WindowsForms
         int height = 10;
         int width = 10;
         int distance = 35;
-        int numberMine = 10;
         Dictionary<Button, Cell> dictionaryCell = new Dictionary<Button, Cell>();
-        Field field = new Field(10, 10, 10);
+        Field field;
 
         public Form1()
         {
@@ -23,11 +22,13 @@ namespace GameSaper.WindowsForms
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
+            GamePanel.Controls.Clear();
             StartGame();
         }
 
         private void StartGame()
         {
+            field = new Field(10, 10, 10);
             for (int x = 10; x < height * distance; x += distance)
             {
                 int index = (x - 10) / distance;
@@ -59,6 +60,14 @@ namespace GameSaper.WindowsForms
                 {
                     MessageBox.Show("Вы проиграли!");
                     button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
+                    foreach (var bomb in field.GetBombs())
+                    {
+                        dictionaryCell
+                            .Where(keyValue => keyValue.Value == bomb)
+                            .First()
+                            .Key
+                            .Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
+                    }
                 }
                 else
                 {
@@ -75,6 +84,9 @@ namespace GameSaper.WindowsForms
                             break;
                         case 4:
                             button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img6.png");
+                            break;
+                        default:
+                            button.BackColor = Color.Black;
                             break;
                     }
                 }

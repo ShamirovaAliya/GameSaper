@@ -18,8 +18,8 @@ namespace GameSaper.Domain
                 Cells.AddRange(Rows[i].Cells);
             }
 
-            Random rnd = new Random(DateTime.Now.Second);
-            for (int i = 1; i <= bombsNumber; i++)
+            Random rnd = new Random();
+            for (int j = 1; j <= bombsNumber; j++) 
             {
                 int index = 0;
                 do
@@ -28,7 +28,7 @@ namespace GameSaper.Domain
                 }
                 while (Cells[index].IsBomb);
 
-                Cells[i].IsBomb = true;
+                Cells[index].IsBomb = true;
             }
         }
 
@@ -56,6 +56,18 @@ namespace GameSaper.Domain
 
             cellsAround = cellsAround.Where(c => c.Colunm >= cell.Colunm - 1 && c.Colunm <= cell.Colunm + 1);
             return cellsAround.Where(c => c.IsBomb).Count();
+        }
+
+        public List<Cell> GetBombs()
+        {
+            return Cells.Where(x => x.IsBomb).ToList();
+        }
+
+        public bool CheckCells()
+        {
+            var cells = GetBombs();
+            var numberCellScheckboxes = cells.Where(x => x.WithFlag).Count();
+            return cells.Count() == numberCellScheckboxes;
         }
 
         public int BombsNumber { get; set; }
