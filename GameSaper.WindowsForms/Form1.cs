@@ -58,37 +58,11 @@ namespace GameSaper.WindowsForms
                 field.CellOpen(cell.Id);
                 if (cell.IsBomb)
                 {
-                    MessageBox.Show("Вы проиграли!");
-                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
-                    foreach (var bomb in field.GetBombs())
-                    {
-                        dictionaryCell
-                            .Where(keyValue => keyValue.Value == bomb)
-                            .First()
-                            .Key
-                            .Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
-                    }
+                    PressingLeftButton(button);
                 }
                 else
                 {
-                    switch (field.BombCells(cell.Id))
-                    {
-                        case 1:
-                            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img3.png");
-                            break;
-                        case 2:
-                            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img4.png");
-                            break;
-                        case 3:
-                            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img5.png");
-                            break;
-                        case 4:
-                            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img6.png");
-                            break;
-                        default:
-                            button.BackColor = Color.Black;
-                            break;
-                    }
+                    CellBombsVictory(button, cell.Id);
                 }
             }
             else if (e.Button == MouseButtons.Right)
@@ -96,9 +70,54 @@ namespace GameSaper.WindowsForms
                 field.FlagPut(cell.Id);
                 if (cell.WithFlag)
                 {
-                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img2.png");
+                    PressingRightButton(button);
                 }
             }
+        }
+
+        private void PressingLeftButton(Button button)
+        {
+            MessageBox.Show("Вы проиграли!");
+            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
+            foreach (var bomb in field.GetBombs())
+            {
+                dictionaryCell
+                    .Where(keyValue => keyValue.Value == bomb)
+                    .First()
+                    .Key
+                    .Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
+            }
+        }
+
+        private void CellBombsVictory(Button button, string id)
+        {
+            switch (field.BombCells(id))
+            {
+                case 1:
+                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img3.png");
+                    break;
+                case 2:
+                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img4.png");
+                    break;
+                case 3:
+                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img5.png");
+                    break;
+                case 4:
+                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img6.png");
+                    break;
+                default:
+                    button.BackColor = Color.Black;
+                    break;
+            }
+            if (field.CheckCells())
+            {
+                MessageBox.Show("Поздравляю, вы выиграли!");
+            }    
+        }
+
+        private void PressingRightButton(Button button)
+        {
+            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img2.png");
         }
     }
 }

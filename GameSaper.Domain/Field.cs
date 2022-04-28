@@ -76,5 +76,10 @@ namespace GameSaper.Domain
         public Row[] Rows { get; set; }
         public List<Cell> Cells { get; set; }
         public bool Explode { get; set; }
+
+        public int BombCells(object id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
