@@ -63,9 +63,9 @@ namespace GameSaper.WindowsForms.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img1 {
+        internal static System.Drawing.Bitmap bomb {
             get {
-                object obj = ResourceManager.GetObject("img1", resourceCulture);
+                object obj = ResourceManager.GetObject("bomb", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace GameSaper.WindowsForms.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img2 {
+        internal static System.Drawing.Bitmap flag {
             get {
-                object obj = ResourceManager.GetObject("img2", resourceCulture);
+                object obj = ResourceManager.GetObject("flag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace GameSaper.WindowsForms.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img3 {
+        internal static System.Drawing.Bitmap four {
             get {
-                object obj = ResourceManager.GetObject("img3", resourceCulture);
+                object obj = ResourceManager.GetObject("four", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace GameSaper.WindowsForms.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img4 {
+        internal static System.Drawing.Bitmap free {
             get {
-                object obj = ResourceManager.GetObject("img4", resourceCulture);
+                object obj = ResourceManager.GetObject("free", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace GameSaper.WindowsForms.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img5 {
+        internal static System.Drawing.Bitmap one {
             get {
-                object obj = ResourceManager.GetObject("img5", resourceCulture);
+                object obj = ResourceManager.GetObject("one", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace GameSaper.WindowsForms.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img6 {
+        internal static System.Drawing.Bitmap two {
             get {
-                object obj = ResourceManager.GetObject("img6", resourceCulture);
+                object obj = ResourceManager.GetObject("two", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

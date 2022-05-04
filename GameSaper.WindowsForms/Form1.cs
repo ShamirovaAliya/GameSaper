@@ -1,4 +1,4 @@
-using GameSaper.Domain;
+п»їusing GameSaper.Domain;
 
 namespace GameSaper.WindowsForms
 {
@@ -77,15 +77,15 @@ namespace GameSaper.WindowsForms
 
         private void PressingLeftButton(Button button)
         {
-            MessageBox.Show("Вы проиграли!");
-            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
+            MessageBox.Show("Р’С‹ РїСЂРѕРёРіСЂР°Р»Рё!");
+            button.Image = Properties.Resources.bomb;
             foreach (var bomb in field.GetBombs())
             {
                 dictionaryCell
                     .Where(keyValue => keyValue.Value == bomb)
                     .First()
                     .Key
-                    .Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img1.png");
+                    .Image = Properties.Resources.bomb;
             }
         }
 
@@ -94,16 +94,16 @@ namespace GameSaper.WindowsForms
             switch (field.BombCells(id))
             {
                 case 1:
-                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img3.png");
+                    button.Image = Properties.Resources.one;
                     break;
                 case 2:
-                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img4.png");
+                    button.Image = Properties.Resources.two;
                     break;
                 case 3:
-                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img5.png");
+                    button.Image = Properties.Resources.free;
                     break;
                 case 4:
-                    button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img6.png");
+                    button.Image = Properties.Resources.four;
                     break;
                 default:
                     button.BackColor = Color.Black;
@@ -111,13 +111,13 @@ namespace GameSaper.WindowsForms
             }
             if (field.CheckCells())
             {
-                MessageBox.Show("Поздравляю, вы выиграли!");
+                MessageBox.Show("РџРѕР·РґСЂР°РІР»СЏСЋ, РІС‹ РІС‹РёРіСЂР°Р»Рё!");
             }    
         }
 
         private void PressingRightButton(Button button)
         {
-            button.Image = Image.FromFile(@"C:\project\Saper\GameSaper\Resources\img2.png");
+            button.Image = Properties.Resources.flag;
         }
     }
 }
