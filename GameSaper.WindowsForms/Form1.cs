@@ -4,8 +4,6 @@ namespace GameSaper.WindowsForms
 {
     public partial class Form1 : Form
     {
-        int height = 10;
-        int width = 10;
         int distance = 35;
         Dictionary<Button, Cell> dictionaryCell = new Dictionary<Button, Cell>();
         Field field;
@@ -17,18 +15,35 @@ namespace GameSaper.WindowsForms
 
         private void Form1Load(object sender, EventArgs e)
         {
-            StartGame();
+            StartGame(10, 10);
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            GamePanel.Controls.Clear();
-            StartGame();
+            var widPasingResult = int.TryParse(WidthTB.Text, out var width);
+            var heigPasringResult = int.TryParse(HeightTB.Text, out var height);
+            if (widPasingResult && heigPasringResult)
+            {
+                if (width > 15 || height > 15)
+                {
+                    ErrorLbl.Text = "Максимальное значение 15!";
+                }
+                else
+                {
+                    GamePanel.Controls.Clear();
+                    StartGame(width, height);
+                    ErrorLbl.Text = String.Empty;
+                }
+            }
+            else
+            {
+                ErrorLbl.Text = "Неправильно введены данные!";
+            }
         }
 
-        private void StartGame()
+        private void StartGame(int height, int width)
         {
-            field = new Field(10, 10, 10);
+            field = new Field(height, width, 10);
             for (int x = 10; x < height * distance; x += distance)
             {
                 int index = (x - 10) / distance;
@@ -112,7 +127,7 @@ namespace GameSaper.WindowsForms
             if (field.CheckCells())
             {
                 MessageBox.Show("Поздравляю, вы выиграли!");
-            }    
+            }
         }
 
         private void PressingRightButton(Button button)
