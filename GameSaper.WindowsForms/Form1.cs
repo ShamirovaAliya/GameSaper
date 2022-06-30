@@ -5,7 +5,7 @@ namespace GameSaper.WindowsForms
     public partial class Form1 : Form
     {
         int distance = 35;
-        Dictionary<Button, Cell> dictionaryCell = new Dictionary<Button, Cell>();
+        Dictionary<Button, Cell> dictionaryCell = new Dictionary<Button, Cell>(); //Словарь
         Field field;
 
         public Form1()
@@ -18,11 +18,11 @@ namespace GameSaper.WindowsForms
             StartGame(10, 10);
         }
 
-        private void StartBtn_Click(object sender, EventArgs e)
+        private void StartBtn_Click(object sender, EventArgs e) //Метод, в котором находится выбор размера поля
         {
-            var widPasingResult = int.TryParse(WidthTB.Text, out var width);
-            var heigPasringResult = int.TryParse(HeightTB.Text, out var height);
-            if (widPasingResult && heigPasringResult)
+            var widthPasingResult = int.TryParse(WidthTB.Text, out var width);
+            var heightPasingResult = int.TryParse(HeightTB.Text, out var height);
+            if (widthPasingResult && heightPasingResult)
             {
                 if (width > 15 || height > 15)
                 {
@@ -41,7 +41,7 @@ namespace GameSaper.WindowsForms
             }
         }
 
-        private void StartGame(int height, int width)
+        private void StartGame(int height, int width) //После создания словаря можно узнать к какой ячейке относится кнопка. Создание кнопок
         {
             field = new Field(height, width, 10);
             for (int x = 10; x < height * distance; x += distance)
@@ -64,11 +64,11 @@ namespace GameSaper.WindowsForms
             }
         }
 
-        private void CellBtn_Click(object sender, MouseEventArgs e)
+        private void CellBtn_Click(object sender, MouseEventArgs e) //Метод, связь между кнопками и ячейками
         {
             var button = (Button)sender;
             var cell = dictionaryCell[button];
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left) //Условие для того, чтобы при нажатии левой кнопки мыши выходили числа или бомбы
             {
                 field.CellOpen(cell.Id);
                 if (cell.IsBomb)
@@ -78,9 +78,10 @@ namespace GameSaper.WindowsForms
                 else
                 {
                     CellBombsVictory(button, cell.Id);
+                    OpenEmptyCells(sender);
                 }
             }
-            else if (e.Button == MouseButtons.Right)
+            else if (e.Button == MouseButtons.Right) //Условие для того, чтобы при нажатии правой кнопки мыши можно было ставить флажки
             {
                 field.FlagPut(cell.Id);
                 if (cell.WithFlag)
@@ -94,7 +95,7 @@ namespace GameSaper.WindowsForms
         {
             MessageBox.Show("Вы проиграли!");
             button.Image = Properties.Resources.bomb;
-            foreach (var bomb in field.GetBombs())
+            foreach (var bomb in field.GetBombs()) //Цикл деактивации всех бомб
             {
                 dictionaryCell
                     .Where(keyValue => keyValue.Value == bomb)
@@ -121,7 +122,7 @@ namespace GameSaper.WindowsForms
                     button.Image = Properties.Resources.four;
                     break;
                 default:
-                    button.BackColor = Color.Black;
+                    button.BackColor = Color.DarkGray;
                     break;
             }
             if (field.CheckCells())
@@ -133,6 +134,16 @@ namespace GameSaper.WindowsForms
         private void PressingRightButton(Button button)
         {
             button.Image = Properties.Resources.flag;
+        }
+
+        private void OpenEmptyCells(object sender) //Метод, по открытию пустых ячеек
+        {
+            var button = (Button)sender;
+            var cell = dictionaryCell[button];
+            foreach (var openCell in field.OpenEmptyCells(cell.Id))
+            {
+
+            }
         }
     }
 }

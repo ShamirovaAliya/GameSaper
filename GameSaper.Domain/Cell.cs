@@ -14,5 +14,6 @@ namespace GameSaper.Domain
         public bool IsOpen { get; set; }
         public int Row { get; set; }
         public int Colunm { get; set; }
+        public bool BombNearby { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace GameSaper.Domain
 {
     public class Row //Ряд
     {
+        //Метод, для определения ячеек
         public Row(int cellNumber, int row)
         {
             Cells = new Cell[cellNumber];
