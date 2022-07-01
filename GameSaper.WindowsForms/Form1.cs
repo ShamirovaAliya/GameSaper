@@ -142,7 +142,30 @@ namespace GameSaper.WindowsForms
             var cell = dictionaryCell[button];
             foreach (var openCell in field.OpenEmptyCells(cell.Id))
             {
+                AssignCells(openCell);
+            }
+        }
 
+        private void AssignCells(Cell openCell) //Метод, для присвоения пустого места или цифру в кнопке, в зависимости от количества бомб
+        {
+            var button = dictionaryCell.Keys.FirstOrDefault(btn => dictionaryCell[btn] == openCell);
+            switch (field.BombCells(openCell.Id))
+            {
+                case 1:
+                    button.Image = Properties.Resources.one;
+                    break;
+                case 2:
+                    button.Image = Properties.Resources.two;
+                    break;
+                case 3:
+                    button.Image = Properties.Resources.free;
+                    break;
+                case 4:
+                    button.Image = Properties.Resources.four;
+                    break;
+                default:
+                    button.BackColor = Color.DarkGray;
+                    break;
             }
         }
     }

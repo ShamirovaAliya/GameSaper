@@ -64,7 +64,7 @@ namespace GameSaper.Domain
             return cellsAround.Where(c => c.IsBomb).Count();
         }
 
-        private IEnumerable<Cell> GetCellsAround(Cell cell) //Метод, который возвравщает ячейки вокруг указанной в параметрах
+        private IEnumerable<Cell> GetCellsAround(Cell cell) //Метод, который возвращает ячейки вокруг указанной в параметрах
         {
             var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1);
 
@@ -86,16 +86,15 @@ namespace GameSaper.Domain
 
         public IEnumerable<Cell> OpenEmptyCells(string id) //Метод, для нахождения и открытия пустых ячеек
         {
-            bool IsOpen = true;
             var emptyCells = Cells.Where(cell => cell.IsBomb == false);
             var cell = Cells.Where(x => x.Id == id).First();
-            //var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1);
-            //cellsAround = cellsAround.Where(c => c.Colunm >= cell.Colunm - 1 && c.Colunm <= cell.Colunm + 1);
-            //foreach (var currentcell in cellsAround)
-            //{
-            //    currentcell.IsOpen = true;
-            //}
-            return null;
+            var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1);
+            cellsAround = cellsAround.Where(c => c.Colunm >= cell.Colunm - 1 && c.Colunm <= cell.Colunm + 1);
+            foreach (var currentCell in cellsAround)
+            {
+                currentCell.IsOpen = true;
+            }
+            return cellsAround;
         }
 
         public int BombsNumber { get; set; }
