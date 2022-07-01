@@ -148,7 +148,7 @@ namespace GameSaper.WindowsForms
 
         private void AssignCells(Cell openCell) //Метод, для присвоения пустого места или цифру в кнопке, в зависимости от количества бомб
         {
-            var button = dictionaryCell.Keys.FirstOrDefault(btn => dictionaryCell[btn] == openCell);
+            var button = dictionaryCell.Keys.FirstOrDefault(button => dictionaryCell[button] == openCell);
             switch (field.BombCells(openCell.Id))
             {
                 case 1:
