@@ -57,9 +57,7 @@ namespace GameSaper.Domain
         public int BombCells(string id) //Метод, который показывает сколько ячеек с бомбами вокруг
         {
             var cell = Cells.Where(x => x.Id == id).First();
-
             var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1);
-
             cellsAround = cellsAround.Where(c => c.Colunm >= cell.Colunm - 1 && c.Colunm <= cell.Colunm + 1);
             return cellsAround.Where(c => c.IsBomb).Count();
         }
@@ -67,7 +65,6 @@ namespace GameSaper.Domain
         private IEnumerable<Cell> GetCellsAround(Cell cell) //Метод, который возвращает ячейки вокруг указанной в параметрах
         {
             var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1);
-
             cellsAround = cellsAround.Where(c => c.Colunm >= cell.Colunm - 1 && c.Colunm <= cell.Colunm + 1);
             return cellsAround;
         }
@@ -97,9 +94,6 @@ namespace GameSaper.Domain
             return cellsAround;
         }
 
-        public int BombsNumber { get; set; }
-        public int FlagNumbers { get; set; }
-        public int Nubmers { get; set; }
         public Row[] Rows { get; set; }
         public List<Cell> Cells { get; set; }
         public bool Explode { get; set; }
