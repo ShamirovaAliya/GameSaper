@@ -91,7 +91,7 @@ namespace GameSaper.WindowsForms
             }
         }
 
-        private void PressingLeftButton(Button button)
+        private void PressingLeftButton(Button button) //Метод, нажатие левой кнопки мыши
         {
             MessageBox.Show("Вы проиграли!");
             button.Image = Properties.Resources.bomb;
@@ -131,7 +131,7 @@ namespace GameSaper.WindowsForms
             }
         }
 
-        private void PressingRightButton(Button button)
+        private void PressingRightButton(Button button) //Метод, нажатие правой кнопки мыши
         {
             button.Image = Properties.Resources.flag;
         }
@@ -146,7 +146,7 @@ namespace GameSaper.WindowsForms
             }
         }
 
-        private void AssignCells(Cell openCell) //Метод, отображения содержания ячейки
+        private void AssignCells(Cell openCell) //Метод, отображение содержания ячейки
         {
             var button = dictionaryCell.Keys.FirstOrDefault(button => dictionaryCell[button] == openCell);
             switch (field.BombCells(openCell.Id))
