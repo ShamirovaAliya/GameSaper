@@ -4,9 +4,9 @@ namespace GameSaper.WindowsForms
 {
     public partial class Form1 : Form
     {
-        int distance = 35;
-        Dictionary<Button, Cell> dictionaryCell = new Dictionary<Button, Cell>(); //Словарь
-        Field field;
+        private readonly int distance = 35;
+        private readonly Dictionary<Button, Cell> dictionaryCell = new Dictionary<Button, Cell>(); //Словарь
+        private Field field;
 
         public Form1()
         {
@@ -32,7 +32,7 @@ namespace GameSaper.WindowsForms
                 {
                     GamePanel.Controls.Clear();
                     StartGame(width, height);
-                    ErrorLbl.Text = String.Empty;
+                    ErrorLbl.Text = string.Empty;
                 }
             }
             else
@@ -53,7 +53,7 @@ namespace GameSaper.WindowsForms
                     int cellIndex = (y - 10) / distance;
                     var cell = row.Cells[cellIndex];
 
-                    Button button = new Button();
+                    Button button = new();
                     button.MouseDown += CellBtn_Click;
                     button.Location = new Point(x, y);
                     button.Size = new Size(30, 30);
@@ -64,8 +64,12 @@ namespace GameSaper.WindowsForms
             }
         }
 
-        private void CellBtn_Click(object sender, MouseEventArgs e) //Метод, связь между кнопками и ячейками
+        private void CellBtn_Click(object? sender, MouseEventArgs e) //Метод, связь между кнопками и ячейками
         {
+            if (field.Explode)
+            {
+                return;
+            }
             var button = (Button)sender;
             var cell = dictionaryCell[button];
             if (e.Button == MouseButtons.Left) //Условие для того, чтобы при нажатии левой кнопки мыши выходили числа или бомбы
@@ -169,3 +173,4 @@ namespace GameSaper.WindowsForms
             }
         }
     }
+}

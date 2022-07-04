@@ -61,7 +61,7 @@
             this.GamePanel.ForeColor = System.Drawing.Color.Black;
             this.GamePanel.Location = new System.Drawing.Point(0, 141);
             this.GamePanel.Name = "GamePanel";
-            this.GamePanel.Size = new System.Drawing.Size(383, 390);
+            this.GamePanel.Size = new System.Drawing.Size(383, 380);
             this.GamePanel.TabIndex = 1;
             // 
             // WidthTB

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameSaper.Domain
+﻿namespace GameSaper.Domain
 {
     public class Field //Поле
     {
@@ -18,10 +12,10 @@ namespace GameSaper.Domain
                 Cells.AddRange(Rows[i].Cells);
             }
 
-            Random rnd = new Random();
+            Random rnd = new();
             for (int j = 1; j <= bombsNumber; j++)
             {
-                int index = 0;
+                int index;
                 do
                 {
                     index = rnd.Next(0, Cells.Count - 1);

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameSaper.Domain
+﻿namespace GameSaper.Domain
 {
     public class Row //Ряд
     {
@@ -23,6 +17,6 @@ namespace GameSaper.Domain
             }
         }
 
-        public Cell[] Cells { get; set; }
+        public Cell[] Cells { get; }
     }
 }
