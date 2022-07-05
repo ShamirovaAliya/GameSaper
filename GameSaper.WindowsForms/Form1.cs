@@ -144,7 +144,8 @@ namespace GameSaper.WindowsForms
         {
             var button = (Button)sender;
             var cell = dictionaryCell[button];
-            foreach (var openCell in field.OpenEmptyCells(cell.Id))
+            var cells = field.OpenEmptyCells(cell);
+            foreach (var openCell in cells)
             {
                 AssignCells(openCell);
             }
