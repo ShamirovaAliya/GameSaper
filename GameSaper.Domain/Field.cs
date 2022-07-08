@@ -2,7 +2,7 @@
 {
     public class Field //Поле
     {
-        public Field(int hight, int widht, int bombsNumber)
+        public Field(int hight, int widht, int bombsNumber) //Инициализиция ячеек и рядов, это нужно чтобы потом можно было присвоить значения переменным
         {
             Rows = new Row[hight];
             Cells = new List<Cell>();
@@ -12,7 +12,7 @@
                 Cells.AddRange(Rows[i].Cells);
             }
 
-            Random rnd = new();
+            Random rnd = new(); //Распределение бомб в рандомном порядке и работа со свойством nearbyBomb
             for (int j = 1; j <= bombsNumber; j++)
             {
                 int index;
@@ -32,7 +32,7 @@
             }
         }
 
-        public void CellOpen(string id) //Метод, по открытию ячейки
+        public void CellOpen(string id) //Метод, открытия ячеек
         {
             var cell = Cells.First(x => x.Id == id);
             cell.IsOpen = true;
@@ -42,7 +42,7 @@
             }
         }
 
-        public void FlagPut(string id) //Метод, по вставлению флажка
+        public void FlagPut(string id) //Метод, поставить флажок
         {
             var cell = Cells.Where(x => x.Id == id).First();
             cell.WithFlag = true;
@@ -51,8 +51,9 @@
         public int BombCells(string id) //Метод, который показывает сколько ячеек с бомбами вокруг
         {
             var cell = Cells.Where(x => x.Id == id).First();
-            var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1);
-            cellsAround = cellsAround.Where(c => c.Colunm >= cell.Colunm - 1 && c.Colunm <= cell.Colunm + 1);
+            var cellsAround = Cells.Where(c => c.Row >= cell.Row - 1 && c.Row <= cell.Row + 1)
+                .Where(c => c.Column >= cell.Column - 1 && c.Column <= cell.Column + 1);
+
             return cellsAround.Where(c => c.IsBomb).Count();
         }
 
@@ -61,8 +62,8 @@
             var cellsAround = Cells
                 .Where(c => c.Row >= cell.Row - 1
                 && c.Row <= cell.Row + 1
-                && c.Colunm >= cell.Colunm - 1
-                && c.Colunm <= cell.Colunm + 1
+                && c.Column >= cell.Column - 1
+                && c.Column <= cell.Column + 1
                 && c.IsBomb == false
                 && c.IsOpen == false);
 
@@ -70,37 +71,37 @@
             {
                 return cellsAround.ToList();
             }
+
             return new();
         }
 
-        public List<Cell> GetBombs() //Метод, который возвращает ячейку с бомбами и преобразует его в список
-        {
-            return Cells.Where(x => x.IsBomb).ToList();
-        }
+        public List<Cell> GetBombs() => Cells.Where(x => x.IsBomb).ToList(); //Метод, который возвращает ячейку с бомбами и преобразует его в список
 
         public bool CheckCells() //Метод, для проверки условий победы
         {
             var cells = GetBombs();
             var numberCellScheckboxes = cells.Where(x => x.WithFlag).Count();
-            return cells.Count() == numberCellScheckboxes;
+            return cells.Count == numberCellScheckboxes;
         }
 
         public IEnumerable<Cell> OpenEmptyCells(Cell cell) //Рекурсивный метод, для нахождения и открытия пустых ячеек
         {
-            List<Cell> result = new();
-            if (cell.BombNearby)
+            List<Cell> result = new(); //Собирает ячейки, которые нужно будет открыть с помощью списка
+            if (cell.BombNearby) //Взятие с параметров cell и смотрит есть ли вокруг бомбы
             {
                 return result;
             }
-            var cellsAround = GetCellsAroundWithoutBombs(cell);
-            result.AddRange(cellsAround);
 
-            foreach (var currentCell in cellsAround)
+            var cellsAround = GetCellsAroundWithoutBombs(cell); //Принятие ячейки вокруг, в которых нет бомб и которые закрыты
+            result.AddRange(cellsAround); //Добавление ячейки в result с помощью AddRange
+
+            foreach (var currentCell in cellsAround) //Если попадется число, то будет вызван рекурсивный метод OpenEmptyCells и будет возвращен в пустой список
             {
-                currentCell.IsOpen = true;
-                result.AddRange(OpenEmptyCells(currentCell));
+                currentCell.IsOpen = true; //Смена значения IsOpen на true
+                result.AddRange(OpenEmptyCells(currentCell)); //Добавление элементов в конец списка
             }
-            return result.Distinct();
+
+            return result;
         }
 
         public Row[] Rows { get; set; }

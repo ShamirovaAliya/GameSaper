@@ -10,8 +10,8 @@
             {
                 Cells[i] = new Cell()
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    Colunm = i,
+                    Id = Guid.NewGuid().ToString(), //Уникальный идентификатор, чтобы можно было обозначить каждую ячейку
+                    Column = i,
                     Row = row,
                 };
             }
