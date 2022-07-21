@@ -1,0 +1,112 @@
+﻿@page "/"
+@using GameSaper.Domain
+
+<PageTitle>Index</PageTitle>
+@inject IJSRuntime JS
+
+<h1></h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4 border border-white">
+            @foreach (var row in field.Rows)
+            {
+                <div class="row justify-content-center">
+                    @foreach (var cell in row.Cells)
+                    {
+                        <button class="cell" @onclick="(mouse) => CellClick(mouse, cell)"><img src="~/img/@AssignCells(cell)"></button> //В кнопку передача ячейки
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private Field field = new(10, 10, 10);
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    private void CellClick(MouseEventArgs mouse, Cell cell) //Обработка нажатия
+    {
+        if (field.Explode)
+        {
+            return;
+        }
+
+        if (mouse.Button == 0)
+        {
+            field.CellOpen(cell.Id);
+            if (cell.IsBomb)
+            {
+                Defeat(cell);
+            }
+            else
+            {
+                if (field.CheckCells())
+                {
+                    JS.InvokeVoidAsync("alert", "Поздравляю, вы выиграли!"); //С помощью метода InvokeVoidAsync, взяв с JS функцию alert можно вывести сообщение
+                }
+                else
+                {
+                    OpenEmptyCells(cell);
+                }
+            }
+        }
+        else if (mouse.Button == 2)
+        {
+            field.FlagPut(cell.Id);
+        }
+    }
+
+    private string AssignCells(Cell cell)
+    {
+        if (cell.IsOpen) //Отображение ячеек при открытии
+        {
+            if (cell.IsBomb)
+            {
+                return "bomb.png";
+            }
+            switch (field.BombCells(cell.Id))
+            {
+                case 1:
+                    return "one.png";
+                case 2:
+                    return "two.png";
+                case 3:
+                    return "free.png";
+                case 4:
+                    return "four.png";
+            }
+        }
+        if (cell.WithFlag)
+        {
+            return "flag.png";
+        }
+
+        return "default.jpg";
+    }
+
+    private void Defeat(Cell cell)
+    {
+        foreach (var bomb in field.GetBombs())
+        {
+            bomb.IsOpen = true;
+        }
+        JS.InvokeVoidAsync("alert", "Вы проиграли!"); //С помощью метода InvokeVoidAsync, взяв с JS функцию alert можно вывести сообщение
+
+        StateHasChanged();
+    }
+
+    private void OpenEmptyCells(Cell cell)
+    {
+        var cells = field.OpenEmptyCells(cell);
+        foreach (var openCell in cells)
+        {
+            AssignCells(openCell);
+        }
+    }
+}
