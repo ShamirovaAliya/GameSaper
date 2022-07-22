@@ -13,7 +13,7 @@
                 <div class="row justify-content-center">
                     @foreach (var cell in row.Cells)
                     {
-                        <button class="cell" @onclick="(mouse) => CellClick(mouse, cell)"><img src="~/img/@AssignCells(cell)"></button>
+                        <button class="cell" @onclick="(mouse) => CellClick(mouse, cell)"><img src="@AssignCells(cell)"></button>
                         //В кнопку передача всех ячеек
                     }
                 </div>
@@ -25,7 +25,7 @@
 @code {
     private Field field;
 
-    protected override void OnInitialized()
+    protected override void OnInitialized() //Инициализация компонента
     {
         field = new(10, 10, 10);
     }
@@ -67,26 +67,26 @@
         {
             if (cell.IsBomb)
             {
-                return "bomb.png";
+                return "https://avatars.mds.yandex.net/i?id=d909a7c498d3cc2933951ba4e704eaec-5884061-images-thumbs&n=13";
             }
             switch (field.BombCells(cell.Id))
             {
                 case 1:
-                    return "one.png";
+                    return "https://www.klass39.ru/wp-content/uploads/2015/09/t1@3fba0255-0a59-42cf-bdcb-9a4a0446b444.jpg";
                 case 2:
-                    return "two.png";
+                    return "https://steshka.ru/wp-content/uploads/2015/02/cifra_2_5.jpg";
                 case 3:
-                    return "free.png";
+                    return "https://svgsilh.com/svg/150792-f44336.svg";
                 case 4:
-                    return "four.png";
+                    return "https://www.toutelasignaletique.com/21360-thickbox_default/chiffre-4-en-aluminium-5-coloris-et-2-dimensions-possibles.jpg";
             }
         }
         if (cell.WithFlag)
         {
-            return "flag.png";
+            return "https://e7.pngegg.com/pngimages/337/559/png-clipart-minesweeper-computer-icons-bing-maps-video-game-mines-miscellaneous-game.png";
         }
 
-        return "default.jpg";
+        return "https://coolwallpapers.me/picsup/3396682-matt-surface-texture.jpg";
     }
 
     private void Defeat(Cell cell)

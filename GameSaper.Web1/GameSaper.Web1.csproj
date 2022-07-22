@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\img\bomb.png" />
+    <Content Remove="wwwroot\css\img\flag.png" />
+    <Content Remove="wwwroot\css\img\four.png" />
+    <Content Remove="wwwroot\css\img\free.png" />
+    <Content Remove="wwwroot\css\img\one.png" />
+    <Content Remove="wwwroot\css\img\two.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GameSaper.Domain\GameSaper.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\img\bomb.png" />
+    <None Include="wwwroot\css\img\flag.png" />
+    <None Include="wwwroot\css\img\four.png" />
+    <None Include="wwwroot\css\img\free.png" />
+    <None Include="wwwroot\css\img\one.png" />
+    <None Include="wwwroot\css\img\two.png" />
+  </ItemGroup>
+
+</Project>
