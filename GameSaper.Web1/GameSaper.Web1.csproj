@@ -28,4 +28,8 @@
     <None Include="wwwroot\css\img\two.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BlazorStrap" Version="5.0.106" />
+  </ItemGroup>
+
 </Project>
