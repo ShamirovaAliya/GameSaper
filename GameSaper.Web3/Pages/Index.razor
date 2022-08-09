@@ -13,7 +13,7 @@
                 <div class="row justify-content-center">
                     @foreach (var cell in row.Cells)
                     {
-                        <button class="cell" @onclick="(mouse) => CellClick(mouse, cell)"><img src="@AssignCells(cell)"></button>
+                        <button class="cell" @onclick="(mouse) => CellClick(mouse, cell)"><img src="~/images/@AssignCells(cell)"></button>
                         //В кнопку передача всех ячеек
                     }
                 </div>
