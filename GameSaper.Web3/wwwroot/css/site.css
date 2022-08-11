@@ -49,6 +49,12 @@ a, .btn-link {
         top: 0.5rem;
     }
 
-    .cell {
-        width: 25px;
-    }
+.cell {
+    width: 25px;
+}
+
+img {
+    display: inline-block;
+    height: auto;
+    max-width: 170%;
+}
