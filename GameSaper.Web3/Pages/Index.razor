@@ -13,9 +13,7 @@
                 <div class="row justify-content-center">
                     @foreach (var cell in row.Cells)
                     {
-                        <button class="cell" @onclick="(mouse) => CellClick(mouse, cell)">
-                            <img src="/images/@AssignCells(cell)" />
-                        </button>
+                        <button class="cell" @onmouseup="(mouse) => CellClick(mouse, cell)"><img src="/images/@AssignCells(cell)" /></button>
                         //В кнопку передача всех ячеек
                     }
                 </div>
@@ -57,7 +55,7 @@
                 }
             }
         }
-        else if (mouse.Button == 2)
+        else if (mouse.Button == 1)
         {
             field.FlagPut(cell.Id);
         }

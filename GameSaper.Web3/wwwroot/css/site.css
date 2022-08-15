@@ -50,11 +50,14 @@ a, .btn-link {
     }
 
 .cell {
-    width: 25px;
+    width: 24px;
+    padding: 0;
+    border: none;
+    background: #ededed;
 }
 
 img {
     display: inline-block;
     height: auto;
-    max-width: 170%;
+    width: 90%;
 }
