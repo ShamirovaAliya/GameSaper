@@ -1,13 +1,28 @@
 ﻿@page "/"
 @using GameSaper.Domain
+@using GameSaper.Web3.Models
 
-@inject IJSRuntime JS //Реализация для использования JS
+@*Реализация для использования JS*@
+@inject IJSRuntime JS
 
-<h1></h1>
+@*Ввод параметров поля*@
+<EditForm Model=@fieldSize OnValidSubmit=ChoosingFieldSize>
+    <ValidationSummary /> @*Компонент, с помощью которого можно сообщить об ошибке*@
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Ширина:</label>
+        <InputNumber @bind-Value=fieldSize.Width class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Длина:</label>
+        <InputNumber @bind-Value=fieldSize.Height class="form-control" />
+    </div>
+    <div class="text-center p-4"><button type="submit" class="btn btn-outline-secondary">Начать новую игру</button></div>
+</EditForm>
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-4 border border-white">
+        <div class="col-5 m-2 border border-white">
             @foreach (var row in field.Rows)
             {
                 <div class="row justify-content-center">
@@ -24,10 +39,17 @@
 
 @code {
     private Field field;
+    private FieldSize fieldSize { get; set; } = new();
 
     protected override void OnInitialized() //Инициализация компонента
     {
         field = new(10, 10, 10);
+    }
+
+    private void ChoosingFieldSize() //Метод, по выбору размера поля
+    {
+        field = new(fieldSize.Height, fieldSize.Width, 10);
+        StateHasChanged(); //Метод, для того чтобы сообщить компоненту о том, что произошли изменения и запустить рендеринг(интерфейс)
     }
 
     private void CellClick(MouseEventArgs mouse, Cell cell) //Метод, обработка нажатия
@@ -106,6 +128,7 @@
     private void OpenEmptyCells(Cell cell) //Метод, по открытию пустых ячеек
     {
         var cells = field.OpenEmptyCells(cell);
+
         foreach (var openCell in cells)
         {
             AssignCells(openCell);
