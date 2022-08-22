@@ -44,6 +44,11 @@
     protected override void OnInitialized() //Инициализация компонента
     {
         field = new(10, 10, 10);
+        fieldSize = new FieldSize //Начальные значения для полей Ширина, Длина равные текущему размеру поля при открытии страницы
+        {
+            Height = 10,
+            Width = 10
+        };
     }
 
     private void ChoosingFieldSize() //Метод, по выбору размера поля
