@@ -67,12 +67,37 @@
                 && c.IsBomb == false
                 && c.IsOpen == false);
 
-            if (cellsAround.Any()) //Если ничего не будет найдено, то надо передать список. А если найдет, то преобразует в перечислитель и в список 
+            if (cellsAround.Any()) //Если ничего не будет найдено, то надо передать список. А если найдет, то преобразует в перечислитель и в список
             {
                 return cellsAround.ToList();
             }
 
             return new();
+        }
+
+        private List<Cell> GetClosedCellsAround(Cell cell) //Метод, который возвращает закрытые ячейки вокруг указанной в параметрах
+        {
+            var cellsAround = Cells
+                .Where(c => c.Row >= cell.Row - 1
+                && c.Row <= cell.Row + 1
+                && c.Column >= cell.Column - 1
+                && c.Column <= cell.Column + 1
+                && c.IsOpen == false);
+
+            if (cellsAround.Any()) //Если ничего не будет найдено, то надо передать список. А если найдет, то преобразует в перечислитель и в список
+            {
+                return cellsAround.ToList();
+            }
+
+            return new();
+        }
+
+        public void ToggleSelect(Cell cell) //Метод, чтобы переключить выбор выделен/не выделен
+        {
+            foreach(var currentCell in GetClosedCellsAround(cell))
+            {
+                currentCell.IsSelected = !currentCell.IsSelected;
+            }
         }
 
         public List<Cell> GetBombs() => Cells.Where(x => x.IsBomb).ToList(); //Метод, который возвращает ячейку с бомбами и преобразует его в список

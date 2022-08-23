@@ -28,7 +28,9 @@
                 <div class="row justify-content-center">
                     @foreach (var cell in row.Cells)
                     {
-                        <button class="cell" @onmouseup="(mouse) => CellClick(mouse, cell)"><img src="/images/@AssignCells(cell)" /></button>
+                        <button class="cell" @onmouseup="(mouse) => CellMouseUp(mouse, cell)" @onmousedown="(mousedown) => CellMouseDown(mousedown, cell)">
+                            <img src="/images/@AssignCells(cell)" />
+                        </button>
                         //В кнопку передача всех ячеек
                     }
                 </div>
@@ -45,10 +47,10 @@
     {
         field = new(10, 10, 10);
         fieldSize = new FieldSize //Начальные значения для полей Ширина, Длина равные текущему размеру поля при открытии страницы
-        {
-            Height = 10,
-            Width = 10
-        };
+            {
+                Height = 10,
+                Width = 10
+            };
     }
 
     private void ChoosingFieldSize() //Метод, по выбору размера поля
@@ -57,7 +59,7 @@
         StateHasChanged(); //Метод, для того чтобы сообщить компоненту о том, что произошли изменения и запустить рендеринг(интерфейс)
     }
 
-    private void CellClick(MouseEventArgs mouse, Cell cell) //Метод, обработка нажатия
+    private void CellMouseUp(MouseEventArgs mouse, Cell cell) //Метод, отпускание кнопки
     {
         if (field.Explode)
         {
@@ -82,9 +84,21 @@
                 }
             }
         }
+        else if (mouse.Button == 1)
+        {
+            field.ToggleSelect(cell);
+        }
         else if (mouse.Button == 2)
         {
             field.FlagPut(cell.Id);
+        }
+    }
+
+    private void CellMouseDown(MouseEventArgs mousedown, Cell cell) //Метод, обработка нажатия средней кнопки мыши
+    {
+        if (mousedown.Button == 1)
+        {
+            field.ToggleSelect(cell);
         }
     }
 
@@ -109,6 +123,10 @@
                 default:
                     return "background.png";
             }
+        }
+        else if (cell.IsSelected)
+        {
+            return "selected.png";
         }
         if (cell.WithFlag)
         {

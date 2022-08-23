@@ -9,5 +9,6 @@
         public int Row { get; set; }
         public int Column { get; set; }
         public bool BombNearby { get; set; }
+        public bool IsSelected { get; set; }
     }
 }
