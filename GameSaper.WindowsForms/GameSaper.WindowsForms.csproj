@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="RibbonControlsLibrary" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GameSaper.Domain\GameSaper.Domain.csproj" />
   </ItemGroup>
 

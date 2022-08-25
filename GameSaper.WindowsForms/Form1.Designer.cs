@@ -73,7 +73,7 @@
             // 
             // HeightTB
             // 
-            this.HeightTB.Location = new System.Drawing.Point(262, 62);
+            this.HeightTB.Location = new System.Drawing.Point(263, 62);
             this.HeightTB.Name = "HeightTB";
             this.HeightTB.Size = new System.Drawing.Size(100, 23);
             this.HeightTB.TabIndex = 3;

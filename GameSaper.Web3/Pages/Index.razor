@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using GameSaper.Domain
 @using GameSaper.Web3.Models
+@using System.Threading;
 
 @*Реализация для использования JS*@
 @inject IJSRuntime JS
@@ -19,6 +20,10 @@
     </div>
     <div class="text-center p-4"><button type="submit" class="btn btn-outline-secondary">Начать новую игру</button></div>
 </EditForm>
+
+<div class="text-center">
+    <p class="btn btn-danger" style="width: 80px;">@second</p>
+</div>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -43,20 +48,49 @@
     private Field field;
     private FieldSize fieldSize { get; set; } = new();
 
+    private int second;
+    System.Threading.Timer timer; //Таймер, который использует методы обратного вызова и обслуживается потоками пула потоков
+
     protected override void OnInitialized() //Инициализация компонента
     {
         field = new(10, 10, 10);
         fieldSize = new FieldSize //Начальные значения для полей Ширина, Длина равные текущему размеру поля при открытии страницы
-            {
-                Height = 10,
-                Width = 10
-            };
+        {
+            Height = 10,
+            Width = 10
+        };
     }
 
-    private void ChoosingFieldSize() //Метод, по выбору размера поля
+    private void ChoosingFieldSize() //Метод, по выбору размера поля и начать новую игру
     {
         field = new(fieldSize.Height, fieldSize.Width, 10);
-        StateHasChanged(); //Метод, для того чтобы сообщить компоненту о том, что произошли изменения и запустить рендеринг(интерфейс)
+        second = 0;
+        StopTimer();
+    }
+
+    private void StartTimer()
+    {
+        if (timer == null) //Чтобы таймер запускался, если ещё не запущен
+        {
+            var autoEvent = new AutoResetEvent(false); //Событие автоматического сброса, чтобы сигнализировать о достижении порогового значения тайм-аута в таймере
+            second = 0;
+            timer = new(OnTimedEvent, null, 0, 1000);
+        }
+    }
+
+    private void StopTimer()
+    {
+        if (timer != null)
+        {
+            timer.Dispose(); //Освобождение ресурсов используемые таймером
+            timer = null;
+        }
+    }
+
+    private void OnTimedEvent(object sender) //Метод, увеличивание секундов
+    {
+        second++;
+        InvokeAsync(StateHasChanged);
     }
 
     private void CellMouseUp(MouseEventArgs mouse, Cell cell) //Метод, отпускание кнопки
@@ -67,16 +101,19 @@
         }
         if (mouse.Button == 0)
         {
+            StartTimer();
             field.CellOpen(cell.Id);
             if (cell.IsBomb)
             {
                 Defeat(cell);
+                StopTimer();
             }
             else
             {
                 if (field.CheckCells())
                 {
                     JS.InvokeVoidAsync("alert", "Поздравляю, вы выиграли!"); //С помощью метода InvokeVoidAsync, взяв с JS функцию alert можно вывести сообщение
+                    StopTimer();
                 }
                 else
                 {
@@ -157,4 +194,6 @@
             AssignCells(openCell);
         }
     }
+
+    public bool Enabled { get; set; }
 }
