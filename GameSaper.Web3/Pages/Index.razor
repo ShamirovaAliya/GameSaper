@@ -101,25 +101,7 @@
         }
         if (mouse.Button == 0)
         {
-            StartTimer();
-            field.CellOpen(cell.Id);
-            if (cell.IsBomb)
-            {
-                Defeat(cell);
-                StopTimer();
-            }
-            else
-            {
-                if (field.CheckCells())
-                {
-                    JS.InvokeVoidAsync("alert", "Поздравляю, вы выиграли!"); //С помощью метода InvokeVoidAsync, взяв с JS функцию alert можно вывести сообщение
-                    StopTimer();
-                }
-                else
-                {
-                    OpenEmptyCells(cell);
-                }
-            }
+            LeftMouseUp(mouse, cell);
         }
         else if (mouse.Button == 1)
         {
@@ -128,6 +110,29 @@
         else if (mouse.Button == 2)
         {
             field.FlagPut(cell.Id);
+        }
+    }
+
+    private void LeftMouseUp(MouseEventArgs mouse, Cell cell) //Метод, отпускание леовой кнопки
+    {
+        StartTimer();
+        field.CellOpen(cell.Id);
+        if (cell.IsBomb)
+        {
+            Defeat(cell);
+            StopTimer();
+        }
+        else
+        {
+            if (field.CheckCells())
+            {
+                JS.InvokeVoidAsync("alert", "Поздравляю, вы выиграли!"); //С помощью метода InvokeVoidAsync, взяв с JS функцию alert можно вывести сообщение
+                StopTimer();
+            }
+            else
+            {
+                OpenEmptyCells(cell);
+            }
         }
     }
 
