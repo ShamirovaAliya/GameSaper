@@ -126,6 +126,7 @@
         else
         {
             VictoryConditionCheck(cell);
+            OpenEmptyCells(cell);
         }
     }
 
@@ -177,10 +178,6 @@
         {
             message = "Поздравляю, вы выиграли!";
             StopTimer();
-        }
-        else
-        {
-            OpenEmptyCells(cell);
         }
     }
 
