@@ -3,9 +3,6 @@
 @using GameSaper.Web3.Models
 @using System.Threading;
 
-@*Реализация для использования JS*@
-@inject IJSRuntime JS
-
 @*Ввод параметров поля*@
 <EditForm Model=@fieldSize OnValidSubmit=ChoosingFieldSize>
     <ValidationSummary /> @*Компонент, с помощью которого можно сообщить об ошибке*@
@@ -23,6 +20,7 @@
 
 <div class="text-center">
     <p class="btn btn-danger" style="width: 80px;">@second</p>
+    <p><b>@message</b></p>
 </div>
 
 <div class="container">
@@ -47,6 +45,7 @@
 @code {
     private Field field;
     private FieldSize fieldSize { get; set; } = new();
+    private string message;
 
     private int second;
     System.Threading.Timer timer; //Таймер, который использует методы обратного вызова и обслуживается потоками пула потоков
@@ -63,6 +62,7 @@
 
     private void ChoosingFieldSize() //Метод, по выбору размера поля и начать новую игру
     {
+        message = null;
         field = new(fieldSize.Height, fieldSize.Width, 10);
         second = 0;
         StopTimer();
@@ -110,10 +110,11 @@
         else if (mouse.Button == 2)
         {
             field.FlagPut(cell.Id);
+            VictoryConditionCheck(cell);
         }
     }
 
-    private void LeftMouseUp(MouseEventArgs mouse, Cell cell) //Метод, отпускание леовой кнопки
+    private void LeftMouseUp(MouseEventArgs mouse, Cell cell) //Метод, отпускание левой кнопки
     {
         StartTimer();
         field.CellOpen(cell.Id);
@@ -124,15 +125,7 @@
         }
         else
         {
-            if (field.CheckCells())
-            {
-                JS.InvokeVoidAsync("alert", "Поздравляю, вы выиграли!"); //С помощью метода InvokeVoidAsync, взяв с JS функцию alert можно вывести сообщение
-                StopTimer();
-            }
-            else
-            {
-                OpenEmptyCells(cell);
-            }
+            VictoryConditionCheck(cell);
         }
     }
 
@@ -178,6 +171,19 @@
         return "default.png";
     }
 
+    private void VictoryConditionCheck(Cell cell)
+    {
+        if (field.CheckCells())
+        {
+            message = "Поздравляю, вы выиграли!";
+            StopTimer();
+        }
+        else
+        {
+            OpenEmptyCells(cell);
+        }
+    }
+
     private void Defeat(Cell cell)
     {
         foreach (var bomb in field.GetBombs())
@@ -185,7 +191,7 @@
             bomb.IsOpen = true;
         }
 
-        JS.InvokeVoidAsync("alert", "Вы проиграли!"); //С помощью метода InvokeVoidAsync, взяв с JS функцию alert можно вывести сообщение
+        message = "Вы проиграли!";
 
         StateHasChanged(); //Метод, для того чтобы сообщить компоненту о том, что произошли изменения и запустить рендеринг(интерфейс)
     }

@@ -108,7 +108,7 @@
             var numberCellScheckboxes = cells.Where(x => x.WithFlag).Count();
             return cells.Count == numberCellScheckboxes;
         }
-
+        
         public IEnumerable<Cell> OpenEmptyCells(Cell cell) //Рекурсивный метод, для нахождения и открытия пустых ячеек
         {
             List<Cell> result = new(); //Собирает ячейки, которые нужно будет открыть с помощью списка
@@ -129,8 +129,8 @@
             return result;
         }
 
-        public Row[] Rows { get; set; }
-        public List<Cell> Cells { get; set; }
-        public bool Explode { get; set; }
+        public Row[] Rows { get; private set; }
+        public List<Cell> Cells { get; private set; }
+        public bool Explode { get; private set; }
     }
 }
