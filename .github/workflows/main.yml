@@ -43,9 +43,3 @@ jobs:
         run: dotnet publish BlazorGitHubPagesDemo.csproj -c Release --output release --nologo
           echo Add other actions to build,
           echo test, and deploy your project.
-          
-      - name: Change base-tag in index.html from / to GameSaper
-        run: sed -i 's/<base href="\/" \/>/<base href="\/BlazorGitHubPagesDemo\/" \/>/g' release/Pages/index.razor
-        
-      - name: Add .nojekyll file
-        run: touch release/Pages/.nojekyll
