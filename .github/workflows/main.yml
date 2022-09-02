@@ -36,7 +36,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
-          folder: release/wwwroot
+          folder: release/Pages
 
       # Runs a set of commands using the runners shell
       - name: Change base-tag in index.html from / to BlazorGitHubPagesDemo
