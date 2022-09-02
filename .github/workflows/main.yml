@@ -39,7 +39,7 @@ jobs:
           folder: release/wwwroot
 
       # Runs a set of commands using the runners shell
-      - name: Publish .NET Core Project
-        run: dotnet publish BlazorGitHubPagesDemo.csproj -c Release --output release --nologo
+      - name: Change base-tag in index.html from / to BlazorGitHubPagesDemo
+        run: sed -i 's/<base href="\/" \/>/<base href="\/BlazorGitHubPagesDemo\/" \/>/g' release/Pages/index.razor
           echo Add other actions to build,
           echo test, and deploy your project.
