@@ -32,7 +32,7 @@ jobs:
           include-prerelease: true
           
       - name: Uploading files to gh-pages branch
-        uses: ShamirovaAliya/github-pages-deploy-action@4.1.4
+        uses: ShamirovaAliya/GameSaper/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
           folder: release/wwwroot
