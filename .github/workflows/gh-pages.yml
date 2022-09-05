@@ -35,7 +35,7 @@ jobs:
         run: dotnet publish BlazorGitHubPagesDemo.csproj -c Release --output release --nologo
           
       - name: Commit wwwroot to GitHub Pages
-        uses: ShamirovaAliya/github-pages-deploy-action@4.4.0
+        uses: ShamirovaAliya/GameSaper/github-pages-deploy-action@4.4.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
