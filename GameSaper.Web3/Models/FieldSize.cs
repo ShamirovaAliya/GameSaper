@@ -12,5 +12,8 @@ namespace GameSaper.Web3.Models
         [Required]
         [Range(5, 15, ErrorMessage = "Минимальное значение 5. Максимальное значение 15.")]
         public int Width { get; set; }
+
+        [Required]
+        public int NumberBombs { get; set; }
     }
 }

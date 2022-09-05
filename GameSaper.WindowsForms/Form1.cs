@@ -89,7 +89,7 @@ namespace GameSaper.WindowsForms
             }
             else if (e.Button == MouseButtons.Right) //Условие для того, чтобы при нажатии правой кнопки мыши можно было ставить флажки
             {
-                field.FlagPut(cell.Id);
+                field.ToggleFlag(cell.Id);
                 if (cell.WithFlag)
                 {
                     PressingRightButton(button);

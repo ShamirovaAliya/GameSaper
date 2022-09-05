@@ -42,10 +42,10 @@
             }
         }
 
-        public void FlagPut(string id) //Метод, поставить флажок
+        public void ToggleFlag(string id) //Метод, переключить флажок
         {
             var cell = Cells.Where(x => x.Id == id).First();
-            cell.WithFlag = true;
+            cell.WithFlag = !cell.WithFlag;
         }
 
         public int BombCells(string id) //Метод, который показывает сколько ячеек с бомбами вокруг
