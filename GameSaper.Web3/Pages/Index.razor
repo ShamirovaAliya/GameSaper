@@ -23,8 +23,8 @@
     <div class="text-center p-4"><button type="submit" class="btn btn-outline-secondary">Начать новую игру</button></div>
 </EditForm>
 
-<p class="text-center">Время @second</p>
-<p class="text-center">Оставшиеся бомбы @remainingBombs</p>
+<p class="text-center">Время: @second</p>
+<p class="text-center">Оставшиеся бомбы: @remainingBombs</p>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -47,7 +47,7 @@
 
 @code {
     private Field field;
-    private FieldSize fieldSize { get; set; } = new();
+
     private string message;
 
     private int second;
@@ -55,26 +55,31 @@
 
     private int remainingBombs = 10;
 
+    private FieldSize fieldSize { get; set; } = new();
+
     protected override void OnInitialized() //Инициализация компонента
     {
         field = new(10, 10, 10);
         fieldSize = new FieldSize //Начальные значения для полей Ширина, Длина равные текущему размеру поля при открытии страницы
-            {
-                Height = 10,
-                Width = 10,
-                NumberBombs = 10
-            };
+        {
+            Height = 10,
+            Width = 10,
+            NumberBombs = 10
+        };
     }
 
-    private void ChoosingFieldSize() //Метод, по выбору размера поля, бомб и начать новую игру
+    private void ChoosingFieldSize() //Метод, по выбору размера поля, установка кол-ва бомб, отображение оставшегося кол-ва бомб и начать новую игру
     {
         message = null;
+
         int maximumNumberBombs = fieldSize.Height * fieldSize.Width / 2; //Подсчёт половины от общего количества бомб
         if (maximumNumberBombs >= fieldSize.NumberBombs)
         {
             field = new(fieldSize.Height, fieldSize.Width, fieldSize.NumberBombs);
+
             second = 0;
             remainingBombs = fieldSize.NumberBombs;
+
             StopTimer();
         }
         else
@@ -132,6 +137,7 @@
     {
         StartTimer();
         field.CellOpen(cell.Id);
+
         if (cell.IsBomb)
         {
             Defeat(cell);
@@ -152,6 +158,7 @@
     private void RightMouseUp(Cell cell) //Метод, отпускание правой кнопки
     {
         field.ToggleFlag(cell.Id);
+
         if (cell.WithFlag)
         {
             if (field.CheckCells())
@@ -168,7 +175,7 @@
         }
     }
 
-    private void CellMouseDown(MouseEventArgs mousedown, Cell cell) //Метод, обработка нажатия средней кнопки мыши
+    private void CellMouseDown(MouseEventArgs mousedown, Cell cell) //Метод, обработка нажатия средней кнопки
     {
         if (mousedown.Button == 1)
         {
