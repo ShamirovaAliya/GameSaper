@@ -6,9 +6,9 @@ name: gh-pages
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "gh-pages" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "gh-pages" ]
+    branches: [ "master" ]
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,7 +28,6 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Publish .NET Core Project
-        run: dotnet publish BlazorGitHubPagesDemo.csproj -c Release --output release --nologo
           
       - name: Uploading files to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@4.1.4
