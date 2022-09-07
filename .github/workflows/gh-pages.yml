@@ -21,7 +21,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Setup .NET 6
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2.1.0
         with:
           dotnet-version: '6.0.x'
           include-prerelease: true
