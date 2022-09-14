@@ -27,7 +27,4 @@ jobs:
       with:
        github_token: ${{ secrets.PUBLISH_TOKEN }}
        publish_branch: gh-pages
-       publish_dir: bin/Release/net6.0/publish/wwwroot
-       allow_empty_commit: false
-       keep_files: false
-       force_orphan: true
+       FOLDER: bin/Release/net6.0/publish/wwwroot
