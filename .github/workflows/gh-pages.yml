@@ -20,15 +20,15 @@ jobs:
 
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish GameSaper.Web.csproj -c Release -o release --nologo
+      run: dotnet publish GameSaper.Web.csproj -c Debug -o debug --nologo
       
     # changes the base-tag in index.html from '/' to 'GameSaper.Web' to match GitHub Pages repository subdirectory
     - name: Change base-tag in index.html from / to  GameSaper.Web
-      run: sed -i 's/<base href="\/" \/>/<base href="\/GameSaper.Web\/" \/>/g' release/wwwroot/index.html
+      run: sed -i 's/<base href="\/" \/>/<base href="\/GameSaper.Web\/" \/>/g' debug/wwwroot/index.html
         
     # copy index.html to 404.html to serve the same file when a file is not found
     - name: copy index.html to 404.html
-      run: cp release/wwwroot/index.html release/wwwroot/404.html
+      run: cp debug/wwwroot/index.html debug/wwwroot/404.html
       
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
@@ -38,5 +38,5 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: release/wwwroot
+        FOLDER: debug/wwwroot
       
