@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaper.WindowsForms", "G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaper.Domain", "GameSaper.Domain\GameSaper.Domain.csproj", "{FF02709E-CF70-46E0-BCC6-599E8A43C6FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSaper.Web3", "GameSaper.Web3\GameSaper.Web3.csproj", "{B3EFBB70-F681-4018-A138-C592E93646BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaper.Web", "GameSaper.Web\GameSaper.Web.csproj", "{C0A1BE04-7AFE-43BD-B512-C8EC1CD6681C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{FF02709E-CF70-46E0-BCC6-599E8A43C6FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF02709E-CF70-46E0-BCC6-599E8A43C6FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF02709E-CF70-46E0-BCC6-599E8A43C6FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3EFBB70-F681-4018-A138-C592E93646BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3EFBB70-F681-4018-A138-C592E93646BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3EFBB70-F681-4018-A138-C592E93646BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3EFBB70-F681-4018-A138-C592E93646BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A1BE04-7AFE-43BD-B512-C8EC1CD6681C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A1BE04-7AFE-43BD-B512-C8EC1CD6681C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A1BE04-7AFE-43BD-B512-C8EC1CD6681C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A1BE04-7AFE-43BD-B512-C8EC1CD6681C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
