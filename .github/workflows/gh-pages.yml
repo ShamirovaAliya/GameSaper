@@ -2,7 +2,8 @@ name: gh-pages
 
 on:
   push:
-    branches: [ shamirova/win-indication-fix ]
+    branches: 
+      - shamirova/win-indication-fix
 
 jobs:
   gh-pages:
@@ -26,5 +27,5 @@ jobs:
     - name: GitHub Pages action
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
-       publish_branch: gh-pages
+       branch: shamirova/win-indication-fix
        FOLDER: bin/Release/net6.0/publish/wwwroot
