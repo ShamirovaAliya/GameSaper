@@ -1,0 +1,37 @@
+name: gh-pages
+
+# Run workflow on every push to the master branch
+on:
+  push:
+    branches: 
+      - shamirova/win-indication-fix
+
+jobs:
+  gh-pages:
+   # use ubuntu-latest image to run steps on
+    runs-on: ubuntu-latest
+    steps:
+    # uses GitHub's checkout action to checkout code form the master branch
+    - uses: actions/checkout@v2
+    
+    # sets up SDK
+    - name: Setup .NET 6
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+        include-prerelease: true
+
+    # generate static files
+    - name: Publish
+      run: dotnet publish ./GameSaper.Web/GameSaper.Web.csproj -c Release --output release --nologo
+      
+    - name: GitHub Pages action
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+       branch: shamirova/win-indication-fix
+       FOLDER: release/wwwroot
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
