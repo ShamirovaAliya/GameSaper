@@ -26,6 +26,5 @@ jobs:
     - name: GitHub Pages action
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
-       github_token: ${{ secrets.PUBLISH_TOKEN }}
        publish_branch: gh-pages
        FOLDER: bin/Release/net6.0/publish/wwwroot
