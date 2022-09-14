@@ -30,4 +30,3 @@ jobs:
       with:
        branch: shamirova/win-indication-fix
        folder: release/wwwroot
-
