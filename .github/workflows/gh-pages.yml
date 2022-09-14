@@ -21,7 +21,7 @@ jobs:
       
       # publishes Blazor project to the release-folder
     - name: Publish
-      run: dotnet publish GameSaper.Web.csproj --configuration Release
+      run: dotnet publish GameSaper.Web/GameSaper.Web.csproj --configuration Release
       
     - name: GitHub Pages action
       uses: JamesIves/github-pages-deploy-action@4.1.4
