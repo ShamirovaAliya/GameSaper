@@ -3,7 +3,7 @@ name: gh-pages
 on:
   push:
     branches: 
-      - shamirova/win-indication-fix
+      - gh-pages
 
 jobs:
   gh-pages:
