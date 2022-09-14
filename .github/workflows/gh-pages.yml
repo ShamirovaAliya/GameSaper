@@ -27,5 +27,5 @@ jobs:
     - name: GitHub Pages action
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
-       branch: shamirova/win-indication-fix
+       branch: gh-pages
        FOLDER: release/wwwroot
