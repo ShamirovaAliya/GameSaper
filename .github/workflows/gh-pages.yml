@@ -14,7 +14,7 @@ jobs:
     
     # sets up .NET Core SDK 3.1
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2.1.0
       with:
         dotnet-version: 3.1
 
@@ -27,8 +27,7 @@ jobs:
       run: dotnet publish GameSaper.Web.csproj -c Debug -o debug --nologo
       
     - name: Commit wwwroot to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@3.7.1
+      uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
         FOLDER: debug/wwwroot
