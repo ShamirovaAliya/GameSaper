@@ -7,16 +7,20 @@ on:
 
 jobs:
   gh-pages:
+    # use ubuntu-latest image to run steps on
     runs-on: ubuntu-latest
     steps:
+    # uses GitHub's checkout action to checkout code form the master branch
     - uses: actions/checkout@v2
     
+    # sets up Setup .NET
     - name: Setup .NET 6
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '6.0.x'
         include-prerelease: true
-
+      
+      # publishes Blazor project to the release-folder
     - name: Publish
       run: dotnet publish ./GameSaper.Web/GameSaper.Web.csproj -c Release --output release --nologo
       
