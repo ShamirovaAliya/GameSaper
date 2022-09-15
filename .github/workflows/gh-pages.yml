@@ -31,5 +31,5 @@ jobs:
        folder: release/wwwroot
 
       # changes the base-tag in index.html from
-    - name: Change base-tag in index.html from / to GameSaper
-      run: sed -i 's/<base href="\/" \/>/<base href="\/GameSaper\/" \/>/g' release/wwwroot/index.html
+    - name: Change base-tag in index.html from / to GameSaper.Web
+      run: sed -i 's/<base href="\/" \/>/<base href="\/GameSaper.Web\/" \/>/g' release/wwwroot/index.html
