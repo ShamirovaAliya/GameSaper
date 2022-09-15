@@ -30,3 +30,6 @@ jobs:
        branch: gh-pages
        folder: release/wwwroot
 
+      # changes the base-tag in index.html from
+    - name: Change base-tag in index.html from / to GameSaper
+      run: sed -i 's/<base href="\/" \/>/<base href="\/GameSaper\/" \/>/g' release/wwwroot/index.html
