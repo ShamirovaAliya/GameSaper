@@ -8,7 +8,7 @@
   "resources": {
     "assembly": {
       "GameSaper.Domain.dll": "sha256-nAbWqX07uL+aNstFhzZpqpJAWGbj4usVoJuuihF56UQ=",
-      "GameSaper.Web.dll": "sha256-vSf0m+EIGRjRnKSNU7JcdUXUCb1N\/\/Z21\/xtt0PbZKo=",
+      "GameSaper.Web.dll": "sha256-Rk\/0gqS2u+RXbG+kHwQyEKwiG8lIJYbdMq9oVwYcqhg=",
       "Microsoft.AspNetCore.Components.dll": "sha256-0GmVYrjPtbIEYxW5WnnhiTF1u8C+VMnBMeF7LntgF38=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-8Y\/3qRbCZt\/yVAoMRHtFufe64bLH6wWQs5i1nURGp3U=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-NQkD1PNTDPXpInfDG7NkQQ95RqieRuw\/hojXj6vpaVM=",
