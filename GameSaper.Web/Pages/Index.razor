@@ -35,7 +35,7 @@
                     @foreach (var cell in row.Cells)
                     {
                         <button class="cell" @onmouseup="(mouse) => CellMouseUp(mouse, cell)" @onmousedown="(mousedown) => CellMouseDown(mousedown, cell)">
-                            <img src="/images/@AssignCells(cell)" />
+                            <img src="./images/@AssignCells(cell)" />
                         </button>
                         //В кнопку передача всех ячеек
                     }
