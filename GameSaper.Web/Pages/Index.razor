@@ -52,6 +52,7 @@
 
     private int second;
     System.Threading.Timer timer; //Таймер, который использует методы обратного вызова и обслуживается потоками пула потоков
+    System.Threading.Timer messageTimer;
 
     private int remainingBombs = 10;
 
@@ -73,11 +74,11 @@
         int maximumNumberBombs = fieldSize.Height * fieldSize.Width / 2; //Подсчёт половины от общего количества бомб
         if (maximumNumberBombs < fieldSize.NumberBombs)
         {
-            message = $"Бомб не должно быть больше половины от общего числа ячеек ({maximumNumberBombs})";
+            DisplayMessage($"Бомб не должно быть больше половины от общего числа ячеек ({maximumNumberBombs})");
         }
         else if (fieldSize.NumberBombs < 5)
         {
-            message = $"Минимальное количество бомб 5.";
+            DisplayMessage("Минимальное количество бомб 5.");
         }
         else
         {
@@ -90,11 +91,24 @@
         }
     }
 
+    private void DisplayMessage(string text)
+
+    {
+        message = text;
+        messageTimer = new(ClearMessage, null, 4000, 2000);
+    }
+
+    private void ClearMessage(object? sender) //Метод, очистка сообщения через определённый промежуток времени
+    {
+        message = ""; 
+        InvokeAsync(StateHasChanged);
+        messageTimer.Dispose();
+    }
+
     private void StartTimer()
     {
         if (timer == null) //Чтобы таймер запускался, если ещё не запущен
         {
-            var autoEvent = new AutoResetEvent(false); //Событие автоматического сброса, чтобы сигнализировать о достижении порогового значения тайм-аута в таймере
             second = 0;
             timer = new(OnTimedEvent, null, 0, 1000);
         }
@@ -165,7 +179,7 @@
         {
             if (field.CheckCells())
             {
-                message = "Поздравляю, вы выиграли!";
+                DisplayMessage("Поздравляю, вы выиграли!");
                 StopTimer();
             }
 
@@ -223,7 +237,7 @@
     {
         if (field.CheckCells())
         {
-            message = "Поздравляю, вы выиграли!";
+            DisplayMessage("Поздравляю, вы выиграли!");
             StopTimer();
         }
     }
@@ -235,7 +249,7 @@
             bomb.IsOpen = true;
         }
 
-        message = "Вы проиграли!";
+        DisplayMessage("Вы проиграли!");
 
         StateHasChanged(); //Метод, для того чтобы сообщить компоненту о том, что произошли изменения и запустить рендеринг(интерфейс)
     }
