@@ -78,7 +78,7 @@
         }
         else if (fieldSize.NumberBombs < 5)
         {
-            DisplayMessage("Минимальное количество бомб 5.");
+            DisplayMessage("Минимальное количество бомб 5");
         }
         else
         {
@@ -92,16 +92,15 @@
     }
 
     private void DisplayMessage(string text)
-
     {
         message = text;
-        messageTimer = new(ClearMessage, null, 4000, 2000);
+        messageTimer = new(ClearMessage, null, 2000, 2000);
     }
 
     private void ClearMessage(object? sender) //Метод, очистка сообщения через определённый промежуток времени
     {
         message = ""; 
-        InvokeAsync(StateHasChanged);
+        InvokeAsync(StateHasChanged); //StateHasChanged уведомляет компонент о том, что его состояние изменилось
         messageTimer.Dispose();
     }
 
