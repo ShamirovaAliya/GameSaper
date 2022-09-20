@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GameSaper.Web3.Models
+namespace GameSaper.Web.Models
 {
     public class FieldSize
     {

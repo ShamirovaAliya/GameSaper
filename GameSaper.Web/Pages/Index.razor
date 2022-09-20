@@ -1,13 +1,13 @@
 ﻿@page "/"
 @using GameSaper.Domain
-@using GameSaper.Web3.Models
+@using GameSaper.Web.Models
 @using System.Threading;
 
 @*Ввод параметров поля*@
 <EditForm Model=@fieldSize OnValidSubmit=ChoosingFieldSize>
     <ValidationSummary /> @*Компонент, с помощью которого можно сообщить об ошибке*@
     <DataAnnotationsValidator />
-    <p class="text-left text-danger"><b>@message</b></p>
+    <p class="text-left text-info"><b>@message</b></p>
     <div class="form-group">
         <label>Ширина:</label>
         <InputNumber @bind-Value=fieldSize.Width class="form-control" />
@@ -35,7 +35,7 @@
                     @foreach (var cell in row.Cells)
                     {
                         <button class="cell" @onmouseup="(mouse) => CellMouseUp(mouse, cell)" @onmousedown="(mousedown) => CellMouseDown(mousedown, cell)">
-                            <img src="/images/@AssignCells(cell)" />
+                            <img src="./images/@AssignCells(cell)" />
                         </button>
                         //В кнопку передача всех ячеек
                     }
@@ -52,6 +52,7 @@
 
     private int second;
     System.Threading.Timer timer; //Таймер, который использует методы обратного вызова и обслуживается потоками пула потоков
+    System.Threading.Timer messageTimer;
 
     private int remainingBombs = 10;
 
@@ -70,10 +71,16 @@
 
     private void ChoosingFieldSize() //Метод, по выбору размера поля, установка кол-ва бомб, отображение оставшегося кол-ва бомб и начать новую игру
     {
-        message = null;
-
         int maximumNumberBombs = fieldSize.Height * fieldSize.Width / 2; //Подсчёт половины от общего количества бомб
-        if (maximumNumberBombs >= fieldSize.NumberBombs)
+        if (maximumNumberBombs < fieldSize.NumberBombs)
+        {
+            DisplayMessage($"Бомб не должно быть больше половины от общего числа ячеек ({maximumNumberBombs})");
+        }
+        else if (fieldSize.NumberBombs < 5)
+        {
+            DisplayMessage("Минимальное количество бомб 5");
+        }
+        else
         {
             field = new(fieldSize.Height, fieldSize.Width, fieldSize.NumberBombs);
 
@@ -82,17 +89,25 @@
 
             StopTimer();
         }
-        else
-        {
-            message = $"Бомб не должно быть больше половины от общего числа ячеек ({maximumNumberBombs})";
-        }
+    }
+
+    private void DisplayMessage(string text)
+    {
+        message = text;
+        messageTimer = new(ClearMessage, null, 2000, 2000);
+    }
+
+    private void ClearMessage(object? sender) //Метод, очистка сообщения через определённый промежуток времени
+    {
+        message = ""; 
+        InvokeAsync(StateHasChanged); //StateHasChanged уведомляет компонент о том, что его состояние изменилось
+        messageTimer.Dispose();
     }
 
     private void StartTimer()
     {
         if (timer == null) //Чтобы таймер запускался, если ещё не запущен
         {
-            var autoEvent = new AutoResetEvent(false); //Событие автоматического сброса, чтобы сигнализировать о достижении порогового значения тайм-аута в таймере
             second = 0;
             timer = new(OnTimedEvent, null, 0, 1000);
         }
@@ -107,7 +122,7 @@
         }
     }
 
-    private void OnTimedEvent(object sender) //Метод, увеличивание секундов
+    private void OnTimedEvent(object? sender) //Метод, увеличивание секундов
     {
         second++;
         InvokeAsync(StateHasChanged);
@@ -163,7 +178,7 @@
         {
             if (field.CheckCells())
             {
-                message = "Поздравляю, вы выиграли!";
+                DisplayMessage("Поздравляю, вы выиграли!");
                 StopTimer();
             }
 
@@ -221,7 +236,7 @@
     {
         if (field.CheckCells())
         {
-            message = "Поздравляю, вы выиграли!";
+            DisplayMessage("Поздравляю, вы выиграли!");
             StopTimer();
         }
     }
@@ -233,7 +248,7 @@
             bomb.IsOpen = true;
         }
 
-        message = "Вы проиграли!";
+        DisplayMessage("Вы проиграли!");
 
         StateHasChanged(); //Метод, для того чтобы сообщить компоненту о том, что произошли изменения и запустить рендеринг(интерфейс)
     }
